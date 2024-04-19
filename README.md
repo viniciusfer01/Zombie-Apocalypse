@@ -1,4 +1,51 @@
-# Game Design Document (GDD) - "Zombie Apocalypse" -
+# Zombie-Apocalypse
+
+A websocket multiplayer game, that uses a NodeJS server and Godot Engine client.
+
+# How to run it
+
+1. Clone the repository
+2. Install the dependencies
+3. Run the server
+4. Run the client
+
+# Game Design Document (GDD) - "Zombie Apocalypse" - 🇺🇸
+
+## Game Title
+
+"Zombie Apocalypse" – A multiplayer survival game where players face endless hordes of zombies in a post-apocalyptic setting, aiming to survive as long as possible to achieve the highest score.
+
+## Game Concept
+
+"Zombie Apocalypse" is a multiplayer survival game where players team up to face a zombie invasion in a devastated urban setting. The goal is to survive as long as possible while facing continuous waves of increasingly challenging zombies. Players earn points by eliminating zombies.
+
+## Main Mechanics
+
+- _Real-time survival_: Players face waves of zombies in real-time, with increasing difficulty over time.
+- _Multiplayer gameplay_: The game supports cooperative matches with up to 4 players, encouraging teamwork to face challenges.
+- _Scoring system_: Players earn points by eliminating zombies and surviving for long periods of time. Scores can be shared online to compete with other players.
+- _Item purchasing_: Players can use their accumulated points to purchase weapons, ammunition, and other items in-game, allowing them to equip themselves for continuing to survive the zombie hordes.
+- _Variety of enemies_: Zombies come in different types, each with unique abilities such as faster or stronger zombies.
+
+## Visual Style and Art
+
+- _Semi-realistic graphics_: The game features semi-realistic graphics with detailed textures, lighting, and character models.
+- _Post-apocalyptic setting_: The game takes place in a destroyed urban environment, with abandoned buildings, wrecked cars, and desolate landscapes.
+- _Visual effects_: Blood effects, explosions, and dynamic lighting enhance the atmosphere of horror and action.
+
+## Player Experience
+
+- _Intense and challenging_: Players face an intense game experience, with waves of zombies becoming increasingly difficult to defeat.
+- _Cooperation and strategy_: The game encourages cooperation among players to survive together, planning strategies to face zombie hordes.
+- _Competition_: The scoring system encourages players to compete with each other, aiming to achieve the highest scores and break records.
+
+## Platforms and Technology
+
+- _Godot Engine_: The game will be developed using the Godot Engine, a powerful and accessible platform for game development.
+- _Supported platforms_: The game will be released for PC, with potential for release on other platforms such as consoles and mobile devices in the future.
+- _Multiplayer support with WebSocket_: The game will use WebSocket technology to enable multiplayer, allowing real-time and efficient communication between players. Support for up to 4 players in cooperative matches will be provided through the use of WebSocket, ensuring a stable and fair online experience.
+
+# Game Design Document (GDD) - "Zombie Apocalypse" - 🇧🇷
 
 ## Título do Jogo
 
