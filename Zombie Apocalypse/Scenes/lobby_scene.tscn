@@ -1,0 +1,101 @@
+[gd_scene load_steps=6 format=3 uid="uid://s1mmfdpdyv5b"]
+
+[ext_resource type="Script" path="res://Scripts/lobby_script.gd" id="1_x140g"]
+[ext_resource type="FontFile" uid="uid://cl6mqpvuhvrg6" path="res://Fonts/PirataOne-Regular.ttf" id="2_pgm4k"]
+[ext_resource type="Texture2D" uid="uid://bfb113tjss363" path="res://Images/button_background.png" id="3_fd66h"]
+[ext_resource type="Texture2D" uid="uid://by5ybnwjpr0dt" path="res://Images/button_pressed_background.webp" id="4_1t2sx"]
+[ext_resource type="Texture2D" uid="uid://shh0b1g313wo" path="res://Images/button_disabled_background.png" id="5_pr314"]
+
+[node name="LobbyScene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_x140g")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+
+[node name="TextureButton" type="TextureButton" parent="VBoxContainer"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+size_flags_horizontal = 8
+texture_normal = ExtResource("3_fd66h")
+texture_pressed = ExtResource("4_1t2sx")
+texture_disabled = ExtResource("5_pr314")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="VBoxContainer/TextureButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -72.0
+offset_top = -21.0
+offset_right = 72.0
+offset_bottom = 21.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_pgm4k")
+theme_override_font_sizes/font_size = 32
+text = "Create match"
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme_override_fonts/font = ExtResource("2_pgm4k")
+theme_override_font_sizes/font_size = 30
+text = "Matches list"
+
+[node name="MatchesRichTextLabel" type="RichTextLabel" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 400)
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_fonts/normal_font = ExtResource("2_pgm4k")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+scroll_following = true
+meta_underlined = false
+
+[node name="Label2" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 10
+theme_override_fonts/font = ExtResource("2_pgm4k")
+theme_override_font_sizes/font_size = 32
+text = "Global chat"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ChatRichTextLabel" type="RichTextLabel" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 220)
+layout_mode = 2
+size_flags_vertical = 10
+theme_override_fonts/normal_font = ExtResource("2_pgm4k")
+theme_override_font_sizes/normal_font_size = 32
+
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer"]
+custom_minimum_size = Vector2(900, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 10
+theme_override_fonts/font = ExtResource("2_pgm4k")
+theme_override_font_sizes/font_size = 32
+
+[connection signal="pressed" from="VBoxContainer/TextureButton" to="." method="_on_texture_button_pressed"]
+[connection signal="meta_clicked" from="VBoxContainer/MatchesRichTextLabel" to="." method="_on_matches_rich_text_label_meta_clicked"]
+[connection signal="text_submitted" from="VBoxContainer/LineEdit" to="." method="_on_line_edit_text_submitted"]

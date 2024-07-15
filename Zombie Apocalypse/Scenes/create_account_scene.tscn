@@ -1,0 +1,201 @@
+[gd_scene load_steps=8 format=3 uid="uid://dmrcj7qpb5pqa"]
+
+[ext_resource type="Script" path="res://Scripts/create_account_script.gd" id="1_h8d2o"]
+[ext_resource type="Texture2D" uid="uid://cqogi5x6qc4ia" path="res://Images/background.jpg" id="2_1fkhi"]
+[ext_resource type="Texture2D" uid="uid://cqax031e80ib0" path="res://Images/login_background.jpg" id="3_1nmk0"]
+[ext_resource type="FontFile" uid="uid://cl6mqpvuhvrg6" path="res://Fonts/PirataOne-Regular.ttf" id="4_hmplu"]
+[ext_resource type="Texture2D" uid="uid://bfb113tjss363" path="res://Images/button_background.png" id="5_uxdlh"]
+[ext_resource type="Texture2D" uid="uid://by5ybnwjpr0dt" path="res://Images/button_pressed_background.webp" id="6_ykqa4"]
+[ext_resource type="Texture2D" uid="uid://shh0b1g313wo" path="res://Images/button_disabled_background.png" id="7_hjgue"]
+
+[node name="CreateAccountScene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_h8d2o")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_1fkhi")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+custom_minimum_size = Vector2(500, 198)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_1nmk0")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 127.0
+grow_horizontal = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_colors/font_outline_color = Color(0.337255, 0.337255, 0.337255, 1)
+theme_override_constants/outline_size = 20
+theme_override_fonts/font = ExtResource("4_hmplu")
+theme_override_font_sizes/font_size = 120
+text = "Zombie Apocalypse"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -82.0
+offset_right = 250.0
+offset_bottom = 96.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer2"]
+layout_mode = 2
+
+[node name="UsernameLabel" type="Label" parent="VBoxContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(100, 32)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_colors/font_outline_color = Color(0.337255, 0.337255, 0.337255, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("4_hmplu")
+theme_override_font_sizes/font_size = 25
+text = "Username:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="UsernameLineEdit" type="LineEdit" parent="VBoxContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(302, 32)
+layout_mode = 2
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer2"]
+layout_mode = 2
+
+[node name="PasswordLabel" type="Label" parent="VBoxContainer2/HBoxContainer3"]
+custom_minimum_size = Vector2(100, 32)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_colors/font_outline_color = Color(0.337255, 0.337255, 0.337255, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("4_hmplu")
+theme_override_font_sizes/font_size = 25
+text = "Password:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PasswordLineEdit" type="LineEdit" parent="VBoxContainer2/HBoxContainer3"]
+custom_minimum_size = Vector2(302, 32)
+layout_mode = 2
+secret = true
+
+[node name="ShowPasswordLabel" type="Label" parent="VBoxContainer2/HBoxContainer3"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_colors/font_outline_color = Color(0.337255, 0.337255, 0.337255, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("4_hmplu")
+theme_override_font_sizes/font_size = 20
+text = "Show"
+
+[node name="ShowPasswordButton" type="CheckButton" parent="VBoxContainer2/HBoxContainer3"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer2"]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+
+[node name="CreateAccountButton" type="TextureButton" parent="VBoxContainer2"]
+custom_minimum_size = Vector2(300, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+texture_normal = ExtResource("5_uxdlh")
+texture_pressed = ExtResource("6_ykqa4")
+texture_disabled = ExtResource("7_hjgue")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="VBoxContainer2/CreateAccountButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -65.5
+offset_top = -16.5
+offset_right = 65.5
+offset_bottom = 16.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_colors/font_outline_color = Color(0.337255, 0.337255, 0.337255, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("4_hmplu")
+theme_override_font_sizes/font_size = 25
+text = "Confirm"
+horizontal_alignment = 1
+
+[node name="CreateAccountButton2" type="TextureButton" parent="VBoxContainer2"]
+custom_minimum_size = Vector2(300, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+texture_normal = ExtResource("5_uxdlh")
+texture_pressed = ExtResource("6_ykqa4")
+texture_disabled = ExtResource("7_hjgue")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="VBoxContainer2/CreateAccountButton2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -65.5
+offset_top = -16.5
+offset_right = 65.5
+offset_bottom = 16.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_colors/font_outline_color = Color(0.337255, 0.337255, 0.337255, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("4_hmplu")
+theme_override_font_sizes/font_size = 25
+text = "Return"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="toggled" from="VBoxContainer2/HBoxContainer3/ShowPasswordButton" to="." method="_on_show_password_button_toggled"]
+[connection signal="pressed" from="VBoxContainer2/CreateAccountButton" to="." method="_on_create_account_button_pressed"]
+[connection signal="pressed" from="VBoxContainer2/CreateAccountButton2" to="." method="_on_create_account_button_2_pressed"]
