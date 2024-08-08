@@ -138,6 +138,21 @@ function processMessage ( message, sender_id ) {
                 message_block = {
                     "type": message.type,
                     "transform": message.transform,
+                    "head_transform": message.head_transform,
+                    "id": sender_index
+                };
+                connected_clients [ matches [ message.match_id ].players [ i ] ].ws.send ( JSON.stringify ( message_block ) );
+            }
+        }
+    }
+    else if ( message.type == "weapon_toggled" ) {
+        //Envia para os outros clientes da mesma partida a sua arma atual
+        var sender_index = matches [ message.match_id ].players.indexOf ( sender_id );
+        for ( let i = 0; i < matches [ message.match_id ].players.length; i++ ) {
+            if ( sender_id != matches [ message.match_id ].players [ i ] ) {
+                message_block = {
+                    "type": message.type,
+                    "weapon_index": message.weapon_index,
                     "id": sender_index
                 };
                 connected_clients [ matches [ message.match_id ].players [ i ] ].ws.send ( JSON.stringify ( message_block ) );
@@ -166,6 +181,20 @@ function checkLoginData ( type, client_username, client_password, callback ) {
         callback ( false ); //No match found
     });
 }
+
+setInterval ( () => {
+    // Itera sobre cada partida no objeto matches
+    for ( let matchId in matches ) {
+        if ( matches.hasOwnProperty ( matchId ) ) {
+            matches [ matchId ].players.forEach ( player => {
+                message_block = {
+                    "type": "enemy",
+                };
+                connected_clients [ player ].ws.send ( JSON.stringify ( message_block ) );
+            });
+        }
+    }
+}, 3000 );
 
 //Gera um identificador único para cada cliente
 function getUniqueId () {

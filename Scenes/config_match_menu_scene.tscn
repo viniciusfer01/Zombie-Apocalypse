@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://c80liibpslcse"]
 
 [ext_resource type="FontFile" uid="uid://cl6mqpvuhvrg6" path="res://Fonts/PirataOne-Regular.ttf" id="1_o1oxg"]
-[ext_resource type="Script" path="res://Scripts/config_match_menu_scipt.gd" id="1_ompq4"]
+[ext_resource type="Script" path="res://Scripts/match_menu.gd" id="1_ompq4"]
 [ext_resource type="Texture2D" uid="uid://cqax031e80ib0" path="res://Images/login_background.jpg" id="1_yuffw"]
 [ext_resource type="Texture2D" uid="uid://bfb113tjss363" path="res://Images/button_background.png" id="2_ebnpg"]
 [ext_resource type="Texture2D" uid="uid://by5ybnwjpr0dt" path="res://Images/button_pressed_background.webp" id="3_hxxsp"]

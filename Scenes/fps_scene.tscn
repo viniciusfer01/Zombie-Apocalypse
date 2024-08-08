@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://cmaetk6uj4swy"]
+[gd_scene load_steps=8 format=3 uid="uid://cmaetk6uj4swy"]
 
 [ext_resource type="Script" path="res://Scripts/fps_script.gd" id="1_dgv0i"]
+[ext_resource type="Texture2D" uid="uid://csuxi5tc8yyc2" path="res://Sprites/crosshair.png" id="2_eolqn"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_lx3u3"]
 
@@ -64,3 +65,29 @@ root_node = NodePath("../..")
 libraries = {
 "": SubResource("AnimationLibrary_0osil")
 }
+
+[node name="RayCast3D" type="RayCast3D" parent="Head/Camera3D"]
+target_position = Vector3(0, 0, -200)
+
+[node name="Hand" type="Node3D" parent="Head/Camera3D"]
+
+[node name="TextureRect" type="TextureRect" parent="Head/Camera3D"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 64.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.35, 0.35)
+pivot_offset = Vector2(64, 64)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("2_eolqn")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true

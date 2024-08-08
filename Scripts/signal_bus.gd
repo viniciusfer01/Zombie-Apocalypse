@@ -12,4 +12,8 @@ signal matches_update ( message : String )
 
 signal match_entry ( fps : bool, id : int )
 
-signal position_update ( transform : Transform3D, id : int )
+signal position_update ( transform1 : Transform3D, transform2 : Transform3D, id : int )
+
+signal weapon_toggled ( weapon_index : int, id : int )
+
+signal spawn_enemy ()

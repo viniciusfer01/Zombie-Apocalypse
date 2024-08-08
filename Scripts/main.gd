@@ -21,7 +21,6 @@ func _on_web_socket_connection_closed ():
 func _on_web_socket_message_received ( message ):
 	var parsed_message = JSON.parse_string ( message )
 
-	#Melhorar como o servidor responde
 	if parsed_message.type == "login":
 		#Deleta a cena de login e instancia e adiciona a cena de lobby à cena principal
 		$LoginScene.queue_free ()
@@ -38,4 +37,8 @@ func _on_web_socket_message_received ( message ):
 	elif parsed_message.type == "match_entry":
 		SignalBus.match_entry.emit ( parsed_message.fps,  parsed_message.id )
 	elif parsed_message.type == "position_update":
-		SignalBus.position_update.emit ( str_to_var ( parsed_message.transform ), parsed_message.id )
+		SignalBus.position_update.emit ( str_to_var ( parsed_message.transform ), str_to_var ( parsed_message.head_transform ),  parsed_message.id )
+	elif parsed_message.type == "weapon_toggled":
+		SignalBus.weapon_toggled.emit ( parsed_message.weapon_index, parsed_message.id )
+	'''else:
+		SignalBus.spawn_enemy.emit ()'''

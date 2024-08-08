@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=4 format=3 uid="uid://c255qcoocf42"]
+
+[ext_resource type="PackedScene" uid="uid://cy6765qr36byh" path="res://Models/blasterE.glb" id="1_1ypdf"]
+[ext_resource type="Texture2D" uid="uid://csuxi5tc8yyc2" path="res://Sprites/crosshair.png" id="1_fump6"]
+[ext_resource type="Script" path="res://Scripts/weapon.gd" id="1_monmm"]
+
+[resource]
+script = ExtResource("1_monmm")
+model = ExtResource("1_1ypdf")
+position = Vector3(0.2, -0.25, -0.85)
+rotation = Vector3(0, 180, 0)
+cooldown = 2.0
+max_distance = 100
+damage = 100.0
+sound_shoot = "Sounds/shot_fired.ogg"
+crosshair = ExtResource("1_fump6")
