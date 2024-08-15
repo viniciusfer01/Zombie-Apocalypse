@@ -147,7 +147,6 @@ vertical_alignment = 1
 [node name="EmailLineEdit" type="LineEdit" parent="VBoxContainer2/HBoxContainer4"]
 custom_minimum_size = Vector2(302, 32)
 layout_mode = 2
-secret = true
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer2"]
 custom_minimum_size = Vector2(0, 15)

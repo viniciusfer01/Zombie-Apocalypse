@@ -26,11 +26,11 @@ func _on_login_button_pressed ():
 		"password": password_line_edit.text
 	}
 
-	#if len ( username_line_edit.text ) != 0 and len ( password_line_edit.text ) != 0:
-	client.send ( JSON.stringify ( message_block ) )
+	if len ( username_line_edit.text ) != 0 and len ( password_line_edit.text ) != 0:
+		client.send ( JSON.stringify ( message_block ) )
 
-	username_line_edit.text = ""
-	password_line_edit.text = ""
+		username_line_edit.text = ""
+		password_line_edit.text = ""
 
 func _on_create_account_button_pressed ():
 	#Instancia e adiciona a cena de criação de conta à cena de login ao clicar no botão de criar conta

@@ -27,56 +27,39 @@ wss.on("connection", function connection(ws) {
 function processMessage(message, sender_id) {
   if (message.type == "login") {
     //Verifica se os dados existem no arquivo e envia de vola a autorização de login
-    checkLoginData(
-      message.type,
-      null,
-      message.username,
-      message.password,
-      function (result) {
-        if (!result) {
-          connected_clients[sender_id].username = message.username;
-          let message_block = {
-            type: message.type,
-          };
-          connected_clients[sender_id].ws.send(JSON.stringify(message_block));
-          console.log("Login realizado, cliente: " + sender_id);
-        }
+    checkLoginData(message.username, message.password, function (result) {
+      if (result) {
+        connected_clients[sender_id].username = message.username;
+        let message_block = {
+          type: message.type,
+        };
+        connected_clients[sender_id].ws.send(JSON.stringify(message_block));
+        console.log("Login realizado, cliente: " + sender_id);
       }
-    );
-    let message_block = {
-      type: message.type,
-    };
-    connected_clients[sender_id].ws.send(JSON.stringify(message_block));
-    console.log("Login realizado, cliente: " + sender_id);
+    });
   } else if (message.type == "create_account") {
     //Verifica se o username já existe no arquivo, caso não exista, cria a conta, armazena no arquivo e envia a confimação de criação de conta
-    checkLoginData(
-      message.type,
-      message.email,
-      message.username,
-      message.password,
-      function (result) {
-        if (!result) {
-          let message_block = {
-            type: message.type,
-          };
-          connected_clients[sender_id].ws.send(JSON.stringify(message_block));
-          fs.appendFile(
-            "login_data.txt",
-            "\n" +
-              message.email +
-              " " +
-              message.password +
-              " " +
-              message.username,
-            function (err) {
-              if (err) throw err;
-              console.log("Cadastro realizado, cliente: " + sender_id);
-            }
-          );
-        }
+    verifyNewUserData(message.email, message.username, function (result) {
+      if (!result) {
+        let message_block = {
+          type: message.type,
+        };
+        connected_clients[sender_id].ws.send(JSON.stringify(message_block));
+        fs.appendFile(
+          "login_data.txt",
+          "\n" +
+            message.email +
+            " " +
+            message.password +
+            " " +
+            message.username,
+          function (err) {
+            if (err) throw err;
+            console.log("Cadastro realizado, cliente: " + sender_id);
+          }
+        );
       }
-    );
+    });
   } else if (message.type == "chat") {
     //Recebe uma mensagem de um cliente e envia para os outros clientes para ser exibido no chat global
     Object.keys(connected_clients).forEach(function (id) {
@@ -181,52 +164,41 @@ function processMessage(message, sender_id) {
 }
 
 //Verificação dos dados de login/registro recebidos
-function checkLoginData(
-  type,
-  client_email,
-  client_username,
-  client_password,
-  callback
-) {
-  if (type !== "login" && type !== "create_account") {
-    console.log("Tipo de requisição da mensagem inválido");
-    return;
-  }
-
+function checkLoginData(client_username, client_password, callback) {
   fs.readFile("login_data.txt", function (err, data) {
     if (err) throw err;
-
-    if (type === "create_account") {
-      // if there is no data in the file, create the account
-      if (data.toString().length === 0) {
-        callback(false);
-        return;
-      }
-
-      const row = data.toString().split("\n");
-      for (let i = 0; i < row.length; i++) {
-        var [email, username, password] = row[i].split(" ");
-
-        if (username === client_username || email === client_email) {
-          callback(true);
-          return; //Exit the function after finding a match
-        }
-      }
-      callback(false); //No match found
-      return;
-    }
 
     const row = data.toString().split("\n");
     for (let i = 0; i < row.length; i++) {
       var [email, username, password] = row[i].split(" ");
 
+      console.log(row[i].split(" "));
+
       if (username === client_username && password === client_password) {
-        callback(false);
-        return; //Exit the function after finding a match
+        callback(true);
+
+        return;
       }
     }
-    callback(true); //No match found
-    return;
+    callback(false);
+  });
+}
+
+function verifyNewUserData(client_email, client_username, callback) {
+  fs.readFile("login_data.txt", function (err, data) {
+    if (err) throw err;
+
+    const row = data.toString().split("\n");
+    for (let i = 0; i < row.length; i++) {
+      var [email, username, password] = row[i].split(" ");
+
+      if (username === client_username || email === client_email) {
+        callback(true);
+
+        return;
+      }
+    }
+    callback(false);
   });
 }
 
