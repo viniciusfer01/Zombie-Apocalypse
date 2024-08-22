@@ -13,9 +13,6 @@ func _on_chat_update ( message ):
 	$VBoxContainer/ChatRichTextLabel.add_text ( message + '\n')
 
 func _on_matches_update ( message ):
-	#BBCode centered
-	##url = Match ID
-	###Texto = [black]ID[/black] + [green]Match ID[/gren]
 	var new_bbcode = "[center][url=" + message + "][color=black]Id:[/color] [color=green]" + message + "[/color][/url][/center]\n"
 	$VBoxContainer/MatchesRichTextLabel.append_text ( new_bbcode )
 
@@ -40,13 +37,13 @@ func _on_line_edit_text_submitted ( new_text ):
 #Entrar em uma partida
 func _on_matches_rich_text_label_meta_clicked ( meta ):
 	message_block = {
-		"type": "match_entry",
+		"type": "pre_match_entry",
 		"id": meta
 	}
 	client.send ( JSON.stringify ( message_block ) )
 
-	var match_scene = load ( "res://Scenes/match_scene.tscn" )
-	get_tree ().get_root ().get_node ( "Main/LobbyScene" ).add_child ( match_scene.instantiate () )
+	var pre_match_scene = load ( "res://Scenes/pre_match_scene.tscn" )
+	get_tree ().get_root ().get_node ( "Main" ).add_child ( pre_match_scene.instantiate () )
 	hide ()
 
-	get_node ( "MatchScene" ).match_id = meta
+	get_tree ().get_root ().get_node ( "Main/PreMatchScene" ).match_id = meta

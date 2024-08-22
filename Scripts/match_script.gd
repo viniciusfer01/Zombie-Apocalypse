@@ -1,7 +1,5 @@
 extends Node3D
 
-var match_id : String
-
 var fps_scene = preload ( "res://Scenes/fps_scene.tscn" )
 var ally_scene = preload ( "res://Scenes/ally_scene.tscn" )
 var enemy_scene = preload ( "res://Scenes/enemy_scene.tscn" )
@@ -12,15 +10,18 @@ var enemy_scene = preload ( "res://Scenes/enemy_scene.tscn" )
 	preload ( "res://Weapons/blasterE.tres" )
 ]
 
+var match_id : String
+
 var weapon: Weapon
 
 func _ready ():
-	SignalBus.match_entry.connect ( _on_match_entry )
+	SignalBus.fps_instance.connect ( _on_fps_instance )
 	SignalBus.position_update.connect ( _on_position_update )
 	SignalBus.weapon_toggled.connect ( _on_weapon_toggled )
 	SignalBus.spawn_enemy.connect ( _spawn_enemy )
 
-func _on_match_entry ( fps : bool, id : int ) -> void:
+func _on_fps_instance ( fps : bool, id : int ) -> void:
+	print ( fps, id )
 	if ( fps ):
 		add_child ( fps_scene.instantiate () )
 		get_node ( "FPS" ).name = "FPS" + str ( id )

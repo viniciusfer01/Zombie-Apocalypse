@@ -35,7 +35,9 @@ func _on_web_socket_message_received ( message ):
 	elif parsed_message.type == "create_match":
 		SignalBus.matches_update.emit ( parsed_message.id )
 	elif parsed_message.type == "match_entry":
-		SignalBus.match_entry.emit ( parsed_message.fps,  parsed_message.id )
+		SignalBus.match_entry.emit ()
+	elif parsed_message.type == "fps":
+		SignalBus.fps_instance.emit ( parsed_message.fps, parsed_message.id )
 	elif parsed_message.type == "position_update":
 		SignalBus.position_update.emit ( str_to_var ( parsed_message.transform ), str_to_var ( parsed_message.head_transform ),  parsed_message.id )
 	elif parsed_message.type == "weapon_toggled":

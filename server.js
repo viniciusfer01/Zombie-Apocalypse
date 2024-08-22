@@ -50,9 +50,9 @@ function processMessage(message, sender_id) {
           "\n" +
             message.email +
             " " +
-            message.password +
+            message.username +
             " " +
-            message.username,
+            message.password,
           function (err) {
             if (err) throw err;
             console.log("Cadastro realizado, cliente: " + sender_id);
@@ -85,18 +85,27 @@ function processMessage(message, sender_id) {
       // Enviar a mensagem para todos os clientes
       let message_block = {
         type: message.type,
-        id: message.id,
+        id: message.id
       };
       connected_clients[id].ws.send(JSON.stringify(message_block));
     });
     console.log("Partida criada - id = " + message.id);
-  } else if (message.type == "match_entry") {
+  } else if (message.type == "pre_match_entry") {
     //Adiciona SENDER à partida selecionada
     if (matches[message.id].max_players > 0) {
       matches[message.id].players.push(sender_id);
       matches[message.id].max_players--;
     }
-
+  } else if ( message.type == "match_entry" ) {
+    if ( sender_id == matches [ message.id ].players [ 0 ] ) {
+      for (let i = 0; i < matches[message.id].players.length; i++) {
+        message_block = {
+          type: message.type
+        };
+        connected_clients[matches[message.id].players[i]].ws.send( JSON.stringify(message_block));
+      }
+    }
+  } else if ( message.type == "fps") {
     //Instancia SENDER como FPS e instancia as cenas Ally com os clientes já presentes na partida
     for (let i = 0; i < matches[message.id].players.length; i++) {
       if (sender_id == matches[message.id].players[i]) {
@@ -113,20 +122,6 @@ function processMessage(message, sender_id) {
           id: i,
         };
         connected_clients[sender_id].ws.send(JSON.stringify(message_block));
-      }
-    }
-    //Instancia o SENDER como Ally nos clientes já conectados
-    var id = matches[message.id].players.length - 1;
-    for (let i = 0; i < matches[message.id].players.length; i++) {
-      if (sender_id != matches[message.id].players[i]) {
-        message_block = {
-          type: message.type,
-          fps: false,
-          id: id,
-        };
-        connected_clients[matches[message.id].players[i]].ws.send(
-          JSON.stringify(message_block)
-        );
       }
     }
   } else if (message.type == "position_update") {
@@ -172,8 +167,6 @@ function checkLoginData(client_username, client_password, callback) {
     for (let i = 0; i < row.length; i++) {
       var [email, username, password] = row[i].split(" ");
 
-      console.log(row[i].split(" "));
-
       if (username === client_username && password === client_password) {
         callback(true);
 
@@ -214,7 +207,7 @@ setInterval(() => {
       });
     }
   }
-}, 3000);
+}, 5000);
 
 //Gera um identificador único para cada cliente
 function getUniqueId() {

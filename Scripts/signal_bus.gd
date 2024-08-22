@@ -10,7 +10,9 @@ signal chat_update ( message : String )
 
 signal matches_update ( message : String )
 
-signal match_entry ( fps : bool, id : int )
+signal match_entry ()
+
+signal fps_instance ( fps : bool, id : int )
 
 signal position_update ( transform1 : Transform3D, transform2 : Transform3D, id : int )
 

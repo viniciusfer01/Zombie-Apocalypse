@@ -55,8 +55,6 @@ func fire ():
 func _physics_process ( delta ):
 	if Input.is_action_pressed ( "ui_cancel" ):
 		Input.set_mouse_mode ( Input.MOUSE_MODE_VISIBLE )
-		'''get_node ( "/root/Main/LobbyScene" ).show ()
-		get_parent ().queue_free ()'''
 
 	# Add the gravity.
 	if not is_on_floor():
