@@ -61,3 +61,8 @@ func _spawn_enemy ():
 	add_child ( enemy_scene.instantiate () )
 	get_node ( "Enemy" ).position.x = randf_range ( 0, 2 )
 	get_node ( "Enemy" ).position.z = randf_range ( 0, 2 )
+	
+
+func _spawn_ammo():
+	pass
+	

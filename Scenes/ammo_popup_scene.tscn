@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://qewv4f0knkd8"]
+
+[ext_resource type="Script" path="res://Scripts/ammo_popup_scene.gd" id="1_2jmaw"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_sprhb"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8m1f5"]
+albedo_color = Color(0, 1, 0, 1)
+metallic = 0.6
+roughness = 0.35
+
+[node name="AmmoPopupScene" type="Node3D" groups=["popups"]]
+script = ExtResource("1_2jmaw")
+
+[node name="Node3D" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.961769, 0)
+
+[node name="Area3D" type="Area3D" parent="Node3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/Area3D"]
+shape = SubResource("SphereShape3D_sprhb")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Node3D"]
+material = SubResource("StandardMaterial3D_8m1f5")
+
+[connection signal="body_entered" from="Node3D/Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_shape_entered" from="Node3D/Area3D" to="." method="_on_area_3d_body_shape_entered"]

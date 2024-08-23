@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://c1ni0uyyx6pd6"]
+[gd_scene load_steps=8 format=3 uid="uid://c1ni0uyyx6pd6"]
 
 [ext_resource type="Script" path="res://Scripts/match_script.gd" id="1_negcf"]
 [ext_resource type="Texture2D" uid="uid://byelo7d6ivfqm" path="res://Materials/tile356.png" id="1_q57db"]
+[ext_resource type="PackedScene" uid="uid://qewv4f0knkd8" path="res://Scenes/ammo_popup_scene.tscn" id="3_le6po"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_etkgb"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -34,3 +35,9 @@ shadow_enabled = true
 use_collision = true
 size = Vector3(100, 0.001, 100)
 material = SubResource("StandardMaterial3D_l7beu")
+
+[node name="AmmoPopupScene" parent="." instance=ExtResource("3_le6po")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.02936, 0.000499845, 1.01699)
+
+[node name="AmmoPopupScene2" parent="." instance=ExtResource("3_le6po")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.871302, 0.000499845, -2.97765)
