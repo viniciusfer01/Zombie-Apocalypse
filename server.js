@@ -85,7 +85,7 @@ function processMessage(message, sender_id) {
       // Enviar a mensagem para todos os clientes
       let message_block = {
         type: message.type,
-        id: message.id
+        id: message.id,
       };
       connected_clients[id].ws.send(JSON.stringify(message_block));
     });
@@ -96,16 +96,18 @@ function processMessage(message, sender_id) {
       matches[message.id].players.push(sender_id);
       matches[message.id].max_players--;
     }
-  } else if ( message.type == "match_entry" ) {
-    if ( sender_id == matches [ message.id ].players [ 0 ] ) {
+  } else if (message.type == "match_entry") {
+    if (sender_id == matches[message.id].players[0]) {
       for (let i = 0; i < matches[message.id].players.length; i++) {
         message_block = {
-          type: message.type
+          type: message.type,
         };
-        connected_clients[matches[message.id].players[i]].ws.send( JSON.stringify(message_block));
+        connected_clients[matches[message.id].players[i]].ws.send(
+          JSON.stringify(message_block)
+        );
       }
     }
-  } else if ( message.type == "fps") {
+  } else if (message.type == "fps") {
     //Instancia SENDER como FPS e instancia as cenas Ally com os clientes já presentes na partida
     for (let i = 0; i < matches[message.id].players.length; i++) {
       if (sender_id == matches[message.id].players[i]) {

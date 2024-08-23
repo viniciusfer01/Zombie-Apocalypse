@@ -42,5 +42,5 @@ func _on_web_socket_message_received ( message ):
 		SignalBus.position_update.emit ( str_to_var ( parsed_message.transform ), str_to_var ( parsed_message.head_transform ),  parsed_message.id )
 	elif parsed_message.type == "weapon_toggled":
 		SignalBus.weapon_toggled.emit ( parsed_message.weapon_index, parsed_message.id )
-	'''else:
-		SignalBus.spawn_enemy.emit ()'''
+	else:
+		SignalBus.spawn_enemy.emit ()

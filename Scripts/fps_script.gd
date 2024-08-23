@@ -18,6 +18,7 @@ var mouse_sensitivity = 0.1
 
 var weapon: Weapon
 var weapon_index := 0
+var ammo = 30
 
 @onready var head = $Head
 @onready var camera = $Head/Camera3D
@@ -26,12 +27,14 @@ var weapon_index := 0
 @onready var hand = $Head/Camera3D/Hand
 @onready var blaster_cooldown = $Timer
 @onready var crosshair = $Head/Camera3D/TextureRect
+@onready var ammo_counter = $Head/Camera3D/Label
 
 func _ready ():
 	Input.set_mouse_mode ( Input.MOUSE_MODE_CAPTURED )
 
 	weapon = weapons [ weapon_index ]
 	initiate_change_weapon ( weapon_index )
+	ammo_counter.text = str(ammo)
 
 
 func _input ( event ):
@@ -43,14 +46,19 @@ func _input ( event ):
 func fire ():
 	if Input.is_action_pressed ( "fire" ):
 		if !blaster_cooldown.is_stopped (): return
-		Audio.play ( weapon.sound_shoot )
+		if ammo > 0:
+			Audio.play ( weapon.sound_shoot )
+			
+			ammo -= 1
+			
+			ammo_counter.text = str(ammo)
 
-		blaster_cooldown.start ( weapon.cooldown )
+			blaster_cooldown.start ( weapon.cooldown )
 
-		if raycast.is_colliding ():
-			var target = raycast.get_collider ()
-			if target.is_in_group ( "Enemy" ):
-				target.health -= weapons [ weapon_index ].damage
+			if raycast.is_colliding ():
+				var target = raycast.get_collider ()
+				if target.is_in_group ( "Enemy" ):
+					target.health -= weapons [ weapon_index ].damage
 
 func _physics_process ( delta ):
 	if Input.is_action_pressed ( "ui_cancel" ):
